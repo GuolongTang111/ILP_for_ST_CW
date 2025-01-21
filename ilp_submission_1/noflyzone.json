@@ -1,0 +1,214 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "George Square Area"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [-3.190578818321228, 55.94402412577528],
+                        [-3.1899887323379517, 55.94284650540911],
+                        [-3.187097311019897, 55.94328811724263],
+                        [-3.187682032585144, 55.944477740393744],
+                        [-3.190578818321228, 55.94402412577528]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Dr Elsie Inglis Quadrangle"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [-3.1907182931900024, 55.94519570234043],
+                        [-3.1906163692474365, 55.94498241796357],
+                        [-3.1900262832641597, 55.94507554227258],
+                        [-3.190133571624756, 55.94529783810495],
+                        [-3.1907182931900024, 55.94519570234043]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Bristo Square Open Area"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [-3.189543485641479, 55.94552313663306],
+                        [-3.189382553100586, 55.94553214854692],
+                        [-3.189259171485901, 55.94544803726933],
+                        [-3.1892001628875732, 55.94533688994374],
+                        [-3.189194798469543, 55.94519570234043],
+                        [-3.189135789871216, 55.94511759833873],
+                        [-3.188138008117676, 55.9452738061846],
+                        [-3.1885510683059692, 55.946105902745614],
+                        [-3.1895381212234497, 55.94555918427592],
+                        [-3.189543485641479, 55.94552313663306]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Bayes Central Area"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [-3.1876927614212036, 55.94520696732767],
+                        [-3.187555968761444, 55.9449621408666],
+                        [-3.186981976032257, 55.94505676722831],
+                        [-3.1872327625751495, 55.94536993377657],
+                        [-3.1874459981918335, 55.9453361389472],
+                        [-3.1873735785484314, 55.94519344934259],
+                        [-3.1875935196876526, 55.94515665035927],
+                        [-3.187624365091324, 55.94521973430925],
+                        [-3.1876927614212036, 55.94520696732767]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "central",
+                "style": {
+                    "fillColor": "#FF0000",
+                    "fillOpacity": 0.5,
+                    "color": "#FF0000"
+                }
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [-3.192473, 55.946233],
+                        [-3.192473, 55.942617],
+                        [-3.184319, 55.942617],
+                        [-3.184319, 55.946233],
+                        [-3.192473, 55.946233]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Civerinos Slice",
+                "openingDays": ["MONDAY", "TUESDAY", "FRIDAY", "SATURDAY", "SUNDAY"],
+                "menu": [
+                    {"name": "R1: Margarita", "priceInPence": 1000},
+                    {"name": "R1: Calzone", "priceInPence": 1400}
+                ]
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-3.1912869215011597, 55.945535152517735]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Sora Lella Vegan Restaurant",
+                "openingDays": ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"],
+                "menu": [
+                    {"name": "R2: Meat Lover", "priceInPence": 1400},
+                    {"name": "R2: Vegan Delight", "priceInPence": 1100}
+                ]
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-3.202541470527649, 55.943284737579376]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Domino's Pizza - Edinburgh - Southside",
+                "openingDays": ["WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"],
+                "menu": [
+                    {"name": "R3: Super Cheese", "priceInPence": 1400},
+                    {"name": "R3: All Shrooms", "priceInPence": 900}
+                ]
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-3.1838572025299072, 55.94449876875712]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Sodeberg Pavillion",
+                "openingDays": ["TUESDAY", "WEDNESDAY", "SATURDAY", "SUNDAY"],
+                "menu": [
+                    {"name": "R4: Proper Pizza", "priceInPence": 1400},
+                    {"name": "R4: Pineapple & Ham & Cheese", "priceInPence": 900}
+                ]
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-3.1940174102783203, 55.94390696616939]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "La Trattoria",
+                "openingDays": ["MONDAY", "THURSDAY", "SATURDAY", "SUNDAY"],
+                "menu": [
+                    {"name": "R5: Pizza Dream", "priceInPence": 1400},
+                    {"name": "R5: My kind of pizza", "priceInPence": 900}
+                ]
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-3.1810810679852035, 55.938910643735845]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Halal Pizza",
+                "openingDays": ["MONDAY", "TUESDAY", "WEDNESDAY", "SATURDAY", "SUNDAY"],
+                "menu": [
+                    {"name": "R6: Sucuk delight", "priceInPence": 1400},
+                    {"name": "R6: Dreams of Syria", "priceInPence": 900}
+                ]
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-3.185428203143916, 55.945846113595]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "World of Pizza",
+                "openingDays": ["THURSDAY", "FRIDAY", "TUESDAY"],
+                "menu": [
+                    {"name": "R7: Hot, hotter, the hottest", "priceInPence": 1400},
+                    {"name": "R7: All you ever wanted", "priceInPence": 900}
+                ]
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-3.179798972064253, 55.939884084483]
+            }
+        }
+    ]
+}
