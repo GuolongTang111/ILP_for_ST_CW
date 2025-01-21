@@ -1,0 +1,85 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\begin{document}
+
+\title{ILP CW2 Implementation Essay}
+\author{Guolong Tang, s2286997}
+\date{}
+\maketitle
+
+\section{Introduction}
+This assignment extends the CW1 Java REST service by adding three main endpoints: 
+\texttt{/validateOrder}, \texttt{/calcDeliveryPath}, and \texttt{/calcDeliveryPathAsGeoJson}. 
+Unit and integration tests were enhanced, and the final project is packaged in a Docker image 
+(\texttt{amd64}) to ease deployment across systems.
+
+\section{What Was Implemented}
+\begin{enumerate}
+    \item \textbf{Order Validation} (\texttt{/validateOrder}): Examines each order’s pizzas, 
+    restaurant constraints (including opening days), and credit card information. Returns a 
+    JSON payload with an \texttt{orderStatus} and \texttt{orderValidationCode}.
+    
+    \item \textbf{Delivery Path Calculation} (\texttt{/calcDeliveryPath}): Given a valid order, 
+    computes a drone flight path from the restaurant to Appleton Tower, avoiding no-fly zones 
+    and restricting the drone to remain within the central area if it ever enters it. Hover 
+    steps are appended at origin and destination.
+
+    \item \textbf{GeoJSON Delivery Path} (\texttt{/calcDeliveryPathAsGeoJson}): Provides the 
+    same path as above but in GeoJSON \texttt{FeatureCollection} format (excluding hover 
+    steps).
+\end{enumerate}
+
+\section{Why It Was Done}
+Each endpoint fulfills a clear specification requirement: precise validation ensures correct 
+error reporting; path computation addresses geographical constraints (no-fly zones, central 
+area rule); and GeoJSON output caters to standard mapping tools. Minimal overhead is added 
+to maintain performance.
+
+\section{How It Was Done (Technical Details)}
+\textbf{Overall Architecture:} Implemented with Spring Boot. Two controllers handle new 
+endpoints: \texttt{OrderValidationController} and \texttt{DeliveryPathController}. Each 
+delegates complex logic to dedicated services for clear separation of concerns.
+
+\textbf{Order Validation:} Encapsulated in \\\texttt{OrderValidationService}, it checks 
+\texttt{pizzasInOrder} for matching restaurant menus, ensures the order date corresponds to 
+restaurant openings, verifies prices (including delivery fee), and validates credit card 
+fields (length, expiry parsing, CVV check). If any check fails, an \texttt{OrderStatus.INVALID} 
+and relevant \texttt{OrderValidationCode} is returned.
+
+\textbf{Pathfinding (A* Search):} Implemented in \texttt{CalcDeliveryPathService}. The 
+restaurant location is determined by verifying which single restaurant can supply all pizzas. 
+We then run A* on a discretized grid around Edinburgh, using 16 directions and a step size 
+of 0.00015 degrees. Each potential move is validated:
+\begin{itemize}
+    \item It must not cross no-fly zones, which are stored and checked via \texttt{NoFlyZoneService}.
+    \item Once inside the central area (checked via \texttt{CentralAreaService} and a point-in-polygon 
+    test), the path cannot exit again.
+\end{itemize}
+A small tolerance ensures the drone can reach Appleton Tower if it is within 0.00015 degrees. 
+Hover steps are inserted at the start and end positions.
+
+\textbf{GeoJSON Construction:} For \texttt{/calcDeliveryPathAsGeoJson}, the path from the A* 
+result is converted into a GeoJSON \texttt{FeatureCollection} containing a single 
+\texttt{LineString}. The primary difference is the exclusion of hover duplicates.
+
+\section{How It Was Tested}
+\textbf{Integration Tests:} In \texttt{EndpointsIntegrationTest}, test orders are fetched from 
+\\\texttt{https://ilp-rest-2024.azurewebsites.net/orders} and sent to 
+\texttt{/validateOrder}, \\\texttt{/calcDeliveryPath}, and \texttt{/calcDeliveryPathAsGeoJson}. 
+Responses are checked for:
+\begin{itemize}
+    \item Correct status codes (\texttt{200} for valid inputs, \texttt{400} for invalid).
+    \item Matching \texttt{orderStatus} and \texttt{orderValidationCode}.
+    \item Timely completion (under five seconds).
+\end{itemize}
+
+\section{Conclusion}
+The final system satisfies CW2 requirements: detailed validation, robust path planning, and 
+GeoJSON output. By isolating logic in service classes and ensuring high coverage via 
+integration tests, the application remains modular, testable, and scalable. Docker 
+packaging further simplifies deployment and consistency across different environments.
+
+\end{document}
