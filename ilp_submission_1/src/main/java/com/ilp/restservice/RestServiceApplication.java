@@ -12,7 +12,7 @@ public class RestServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RestServiceApplication.class, args);
 	}
-	private static final String id = "s2286997@ed.ac.uk";
+	private static final String id = "s11111111";
 	@GetMapping("/uuid")
     public String uuid() {
       	return id;
