@@ -19,7 +19,7 @@ jobs:
           java-version: 23
 
       - name: Build with Maven
-        run: mvn -B clean install -f ./ilp_submission_1/pom.xml
+        run: mvn -B clean install -f ./ilp_submission_1/pom.xml -DskipTests
 
       - name: Run integration tests
         run: mvn test -f ./ilp_submission_1/pom.xml
@@ -33,5 +33,5 @@ jobs:
         run: npm install -g newman
 
       - name: Run Postman tests
-        run: newman run ./ilp_submission_1/systemTestCollection.json --reporters cli
+        run: newman run ./systemtests/systemTestCollection.json --reporters cli
 
