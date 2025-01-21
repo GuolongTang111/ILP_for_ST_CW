@@ -19,7 +19,7 @@ jobs:
           java-version: 23
 
       - name: Build with Maven
-        run: mvn -B clean install -f ./ilp_submission_1/pom.xml -DskipTests
+        run: mvn -B clean install -f ./ilp_submission_1/pom.xml -DskipTests -q
 
       - name: Run integration tests
         run: mvn test -f ./ilp_submission_1/pom.xml
