@@ -21,5 +21,17 @@ jobs:
       - name: Build with Maven
         run: mvn -B clean install -f ./ilp_submission_1/pom.xml
 
-      - name: Run tests
+      - name: Run integration tests
         run: mvn test -f ./ilp_submission_1/pom.xml
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16  # or 18, etc.
+
+      - name: Install newman
+        run: npm install -g newman
+
+      - name: Run Postman tests
+        run: newman run ilp_submission_1/src/systemTest/MyCollection.json --reporters cli
+
