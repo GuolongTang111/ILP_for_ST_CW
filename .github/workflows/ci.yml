@@ -19,7 +19,7 @@ jobs:
           java-version: 23
 
       - name: Build with Maven
-        run: mvn -B clean install
+        run: ./mvnw spring-boot:run --quiet
 
       - name: Run tests
         run: mvn test
