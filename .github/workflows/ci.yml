@@ -33,7 +33,7 @@ jobs:
         run: npm install -g newman
 
       - name: Run Service
-        run: ./mvnw spring-boot:run --quiet
+        run: ./ilp_submission_1/mvnw spring-boot:run --quiet
 
       - name: Run Postman tests
         run: newman run ./ilp_submission_1/systemTestCollection.json --reporters cli
