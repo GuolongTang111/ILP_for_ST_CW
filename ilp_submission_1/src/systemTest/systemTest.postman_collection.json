@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:8080/validateOrder Copy",
+			"name": "http://localhost:8080/validateOrder",
 			"event": [
 				{
 					"listen": "test",
