@@ -1,0 +1,59 @@
+{
+	"info": {
+		"_postman_id": "c4031f68-5769-4b6a-8160-9b9e5a2b0855",
+		"name": "systemTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38665902"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/validateOrder Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Order status is VALID\", () => {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.orderStatus).to.eql(\"VALID\");\r",
+							"});\r",
+							"pm.test(\"Order validation Code is NO_ERROR\", () => {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.orderValidationCode).to.eql(\"NO_ERROR\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n  \"orderNo\": \"1234ABCD\",\r\n  \"orderDate\": \"2025-01-05\",        // This is a THURSDAY\r\n  \"priceTotalInPence\": 2400,\r\n  \"pizzasInOrder\": [\r\n    {\r\n      \"name\": \"R6: Sucuk delight\",\r\n      \"priceInPence\": 1400\r\n    },\r\n    {\r\n      \"name\": \"R6: Dreams of Syria\",\r\n      \"priceInPence\": 900\r\n    }\r\n  ],\r\n  \"creditCardInformation\": {\r\n    \"creditCardNumber\": \"1234567812345678\",\r\n    \"creditCardExpiry\": \"10/25\",\r\n    \"cvv\": \"888\"\r\n  }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/validateOrder",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"validateOrder"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -33,5 +33,5 @@ jobs:
         run: npm install -g newman
 
       - name: Run Postman tests
-        run: newman run ./ilp_submission_1/src/systemTest/systemTest.postman_collection --reporters cli
+        run: newman run ./ilp_submission_1/src/systemTest/systemTest.postman_collection.json --reporters cli
 

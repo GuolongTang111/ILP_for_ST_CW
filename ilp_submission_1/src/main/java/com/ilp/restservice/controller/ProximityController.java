@@ -35,3 +35,5 @@ public class ProximityController {
         return ResponseEntity.ok(distance < 0.00015);
     }
 }
+
+
