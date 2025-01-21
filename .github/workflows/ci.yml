@@ -18,8 +18,8 @@ jobs:
           distribution: 'temurin'
           java-version: 23
 
-      - name: Build with Maven
-        run: mvn -B clean install -f ./ilp_submission_1/pom.xml -Dskiptests -q
+      - name: Build with Maven (skip unit tests)
+        run: mvn -B clean install -f ./ilp_submission_1/pom.xml -DskipTests -q
 
       - name: Run integration tests
         run: mvn test -f ./ilp_submission_1/pom.xml
@@ -27,14 +27,19 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
-          node-version: 16  # or 18, etc.
+          node-version: 16
 
       - name: Install newman
         run: npm install -g newman
 
-      - name: Run Service
-        run: ./ilp_submission_1/mvnw spring-boot:run --quiet
+      # ---- START SERVER IN BACKGROUND ----
+      - name: Start Spring Boot in background
+        run: |
+          cd ilp_submission_1
+          nohup ./mvnw spring-boot:run --quiet > ../spring-boot.log 2>&1 &
+          # Wait up to ~10 seconds for the server to start
+          sleep 10
+        shell: bash
 
       - name: Run Postman tests
         run: newman run ./systemtests/systemTestCollection.json --reporters cli
-
