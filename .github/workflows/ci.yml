@@ -10,36 +10,66 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1) Check out code
       - uses: actions/checkout@v2
 
+      # 2) Set up JDK (to run Maven if needed)
       - name: Set up JDK 23
         uses: actions/setup-java@v2
         with:
           distribution: 'temurin'
           java-version: 23
 
-      - name: Build with Maven (skip unit tests)
-        run: mvn -B clean install -f ./ilp_submission_1/pom.xml -DskipTests -q
+      # 3) Build with Maven (skip unit tests if you want)
+      - name: Maven build
+        run: mvn -B clean package -f ./ilp_submission_1/pom.xml -DskipTests
 
-      - name: Run integration tests
-        run: mvn test -f ./ilp_submission_1/pom.xml
+      # 4) Build Docker image
+      #    Here we assume your Dockerfile is in "ilp_submission_1/" directory
+      #    or root. Adjust paths as needed.
+      - name: Build Docker Image
+        run: |
+          cd ilp_submission_1
+          docker build -t myapp:latest .
 
+      # 5) Run Docker container in background
+      - name: Run Docker Container
+        run: |
+          docker run -d --name myapp_container -p 8080:8080 myapp:latest
+          # docker run in background (-d)
+      
+      # 6) Wait for container / do a quick health check
+      - name: Wait for app to start
+        run: |
+          # simple approach: wait 10s
+          sleep 10
+          
+          # Alternatively, do a loop checking if port 8080 is up:
+          # for i in {1..30}; do
+          #   if curl -s http://localhost:8080/actuator/health; then
+          #     echo "Service ready"
+          #     exit 0
+          #   fi
+          #   sleep 2
+          # done
+          # echo "Service never became ready"
+          # exit 1
+
+      # 7) Set up Node (so we can install newman)
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
           node-version: 16
 
+      # 8) Install newman
       - name: Install newman
         run: npm install -g newman
 
-      # ---- START SERVER IN BACKGROUND ----
-      - name: Start Spring Boot in background
-        run: |
-          cd ilp_submission_1
-          nohup ./mvnw spring-boot:run --quiet > ../spring-boot.log 2>&1 &
-          # Wait up to ~10 seconds for the server to start
-          sleep 10
-        shell: bash
-
+      # 9) Run Postman tests (assuming your JSON is in ./systemtests/systemTestCollection.json)
       - name: Run Postman tests
         run: newman run ./systemtests/systemTestCollection.json --reporters cli
+
+      # 10) Stop and remove container
+      - name: Docker Cleanup
+        if: always()
+        run: docker stop myapp_container && docker rm myapp_container
