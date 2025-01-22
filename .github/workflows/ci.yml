@@ -24,6 +24,12 @@ jobs:
       - name: Maven build
         run: mvn -B clean package -f ./ilp_submission_1/pom.xml -DskipTests -q
 
+      - name: Veritfy coverage by jacoco
+        run: mvn clean test
+
+      - name: Veritfy coverage by jacoco
+        run: mvn verify
+
       # 4) Build Docker image
       #    Here we assume your Dockerfile is in "ilp_submission_1/" directory
       #    or root. Adjust paths as needed.
