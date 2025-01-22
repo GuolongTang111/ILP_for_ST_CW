@@ -25,10 +25,10 @@ jobs:
         run: mvn -B clean package -f ./ilp_submission_1/pom.xml -DskipTests -q
 
       - name: Veritfy coverage by jacoco
-        run: mvn clean test
+        run: mvn clean test -f ./ilp_submission_1/pom.xml
 
       - name: Veritfy coverage by jacoco
-        run: mvn verify
+        run: mvn verify -f ./ilp_submission_1/pom.xml
 
       # 4) Build Docker image
       #    Here we assume your Dockerfile is in "ilp_submission_1/" directory
