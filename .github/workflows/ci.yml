@@ -22,7 +22,7 @@ jobs:
 
       # 3) Build with Maven (skip unit tests if you want)
       - name: Maven build
-        run: mvn -B clean package -f ./ilp_submission_1/pom.xml -DskipTests
+        run: mvn -B clean package -f ./ilp_submission_1/pom.xml -DskipTests -q
 
       # 4) Build Docker image
       #    Here we assume your Dockerfile is in "ilp_submission_1/" directory
