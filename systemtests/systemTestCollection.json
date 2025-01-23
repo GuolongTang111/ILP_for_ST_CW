@@ -6,7 +6,7 @@
     },
     "item": [
       {
-        "name": "Order #46FFB2B5 - Expect INVALID/CARD_NUMBER_INVALID",
+        "name": "Order #46FFB2B5 pathAsGeoJson",
         "event": [
           {
             "listen": "test",
