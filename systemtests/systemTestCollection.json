@@ -16,6 +16,47 @@
                 "pm.test(\"Status code is 200\", function () {",
                 "    pm.response.to.have.status(200);",
                 "});",
+                ""
+              ]
+            }
+          }
+        ],
+        "request": {
+          "method": "POST",
+          "header": [],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"orderNo\": \"46FFB2B5\",\n  \"orderDate\": \"2025-01-21\",\n  \"priceTotalInPence\": 2400,\n  \"pizzasInOrder\": [\n    {\n      \"name\": \"R4: Proper Pizza\",\n      \"priceInPence\": 1400\n    },\n    {\n      \"name\": \"R4: Pineapple & Ham & Cheese\",\n      \"priceInPence\": 900\n    }\n  ],\n  \"creditCardInformation\": {\n    \"creditCardNumber\": \"6313034594457\",\n    \"creditCardExpiry\": \"02/25\",\n    \"cvv\": \"301\"\n  }\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          },
+          "url": {
+            "raw": "http://localhost:8080/calcDeliveryPathAsGeoJson",
+            "protocol": "http",
+            "host": [
+              "localhost"
+            ],
+            "port": "8080",
+            "path": [
+              "calcDeliveryPathAsGeoJson"
+            ]
+          }
+        }
+      },
+      {
+        "name": "Order #46FFB2B5 - Expect INVALID/CARD_NUMBER_INVALID",
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Status code is 200\", function () {",
+                "    pm.response.to.have.status(200);",
+                "});",
                 "",
                 "pm.test(\"Order status is INVALID\", () => {",
                 "    const jsonData = pm.response.json();",
